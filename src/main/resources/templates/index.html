@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Elasticsearch News Search</title>
+    <link type="text/css" rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+<div class="box">
+    <h1>Elasticsearch Search</h1>
+    <h3>Search exactly what you want </h3>
+    <div class="searchbox">
+        <form action="/search" method="post">
+            <input type="text" name="keyword">
+            <input type="submit" value="Search">
+        </form>
+    </div>
+    <h3>Give you suggestion by our system </h3>
+    <div class="searchbox">
+        <form action="/suggest" method="post">
+            <input type="text" name="keyword">
+            <input type="submit" value="Suggest">
+        </form>
+    </div>
+
+</div>
+</body>
+</html>
