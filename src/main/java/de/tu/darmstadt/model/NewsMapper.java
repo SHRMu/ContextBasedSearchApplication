@@ -1,4 +1,4 @@
-package cn.pan.model;
+package de.tu.darmstadt.model;
 
 import org.springframework.jdbc.core.RowMapper;
 

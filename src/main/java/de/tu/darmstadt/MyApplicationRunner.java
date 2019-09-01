@@ -1,10 +1,11 @@
-package cn.pan;
+package de.tu.darmstadt;
 
-import cn.pan.controller.IndexController;
-import cn.pan.dao.NewsJDBC;
-import cn.pan.model.NewsDoc;
-import cn.pan.model.UserDoc;
-import cn.pan.service.EsRestService;
+import de.tu.darmstadt.controller.IndexController;
+import de.tu.darmstadt.dao.JDBCNews;
+import de.tu.darmstadt.model.NewsDoc;
+import de.tu.darmstadt.model.UserDoc;
+import de.tu.darmstadt.service.EsRestService;
+import de.tu.darmstadt.service.ModelService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.elasticsearch.common.xcontent.XContentBuilder;
@@ -17,9 +18,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
+import org.tensorflow.SavedModelBundle;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,15 +34,12 @@ public class MyApplicationRunner implements ApplicationRunner {
     @Autowired
     EsRestService restService;
 
-//    @Autowired
-//    TikaService tikaService;
-
     @Override
     public void run(ApplicationArguments var1) throws Exception {
 
-        //删除userdoc索引
 
-        restService.deleteIndex("userdoc");
+        if (restService.existIndex("userdoc"))
+            restService.deleteIndex("userdoc");
 
         //设置mapping
         XContentBuilder builder = null;
@@ -75,29 +73,19 @@ public class MyApplicationRunner implements ApplicationRunner {
 
             if (isSuccess) {
 
-                logger.info("init index susscess. index_name: userdoc, type_name: file, 分片数: 3, 副本数: 0");
+                logger.info("init index susscess. index_name: userdoc, type_name: file, shardNum: 3, repliNum: 0");
                 /**
                  * 批量导数据
                  */
                 Resource resource = new ClassPathResource("files");
                 ObjectMapper objMapper = new ObjectMapper();
 
-                File fileDir = resource.getFile();
                 ArrayList<String> fileList = new ArrayList<>();
-//                if (fileDir.exists() && fileDir.isDirectory()) {
-//                    File[] allFiles = fileDir.listFiles();
-//                    for (File f : allFiles) {
-//                        UserDoc userDoc = tikaService.parserExtraction(f);
-//                        System.out.println(userDoc.toString());
-//                        String json = objMapper.writeValueAsString(userDoc);
-//                        fileList.add(json);
-//                    }
-//                }
                 ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-                NewsJDBC newsJDBC = (NewsJDBC) context.getBean("newsJDBC");
+                JDBCNews JDBCNews = (JDBCNews) context.getBean("JDBCNews");
 
 //                for (int id = 5914747; id <= 5915747; id++) {
-//                    NewsDoc newsDoc = newsJDBC.getNewsDoc(id);
+//                    NewsDoc newsDoc = JDBCNews.getNewsDoc(id);
 //                    UserDoc userDoc = new UserDoc();
 //                    userDoc.setTitle(newsDoc.getNews_title());
 //                    userDoc.setFilecontent(newsDoc.getNews_fulltext());
@@ -105,7 +93,7 @@ public class MyApplicationRunner implements ApplicationRunner {
 //                    fileList.add(json);
 //                }
 
-                List<NewsDoc> allDoc = newsJDBC.getAllDoc();
+                List<NewsDoc> allDoc = JDBCNews.getWorldNewsDoc();
                 for (NewsDoc doc:
                      allDoc) {
                     UserDoc userDoc = new UserDoc();
@@ -118,6 +106,7 @@ public class MyApplicationRunner implements ApplicationRunner {
                 System.out.println("selected news doc "+ fileList.size());
                 restService.indexDoc("userdoc", "file", fileList);
 
+                //建立映射
                 IndexController.word2int = new HashMap<>();
                 IndexController.int2word = new HashMap<>();
                 BufferedReader br = new BufferedReader(new FileReader("D:\\Github\\esfilesearch\\src\\main\\resources\\mymodel\\allWords.txt"));
@@ -129,7 +118,9 @@ public class MyApplicationRunner implements ApplicationRunner {
                     count ++;
                 }
 
-
+                //建立session
+                SavedModelBundle savedModelBundle = SavedModelBundle.load("./src/main/resources/mymodel","myTag");
+                ModelService.session = savedModelBundle.session();
 
             } else {
                 logger.error("索引初始化失败.");

@@ -4,26 +4,31 @@
 <head>
     <title>Elasticsearch News Search</title>
     <link type="text/css" rel="stylesheet" href="css/index.css">
+    <script type="text/javascript" src="js/jQuery.min.js"></script>
 </head>
 <body>
 
 <div class="box">
     <h1>Elasticsearch Search</h1>
-    <h3>Search exactly what you want </h3>
     <div class="searchbox">
         <form action="/search" method="post">
-            <input type="text" name="keyword">
+            <input type="text" name="keyword" id="search_key">
             <input type="submit" value="Search">
+            <div class="search_suggest" id="search_suggest">
+                <ul>
+                </ul>
+            </div>
         </form>
     </div>
-    <h3>Give you suggestion by our system </h3>
-    <div class="searchbox">
-        <form action="/suggest" method="post">
-            <input type="text" name="keyword">
-            <input type="submit" value="Suggest">
-        </form>
-    </div>
-
+    
+    <script>
+        $(function () {
+            alert("hello")
+        })
+    </script>
 </div>
+
+
+
 </body>
 </html>

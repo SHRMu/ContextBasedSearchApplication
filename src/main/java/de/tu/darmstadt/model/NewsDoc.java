@@ -1,4 +1,4 @@
-package cn.pan.model;
+package de.tu.darmstadt.model;
 
 public class NewsDoc {
     private int news_id;

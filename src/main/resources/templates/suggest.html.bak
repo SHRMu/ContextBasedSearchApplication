@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Suggestion Search</title>
     <link type="text/css" rel="stylesheet" href="css/result.css">
 </head>
 <body>
@@ -10,11 +10,11 @@
 <div class="result_search">
     <div class="logo">
         <h2>
-            <a href="/">News Search</a>
+            <a href="/">News Suggestion</a>
         </h2>
     </div>
     <div class="searchbox">
-        <form class="resultform" action="/search" method="post">
+        <form class="resultform" action="/suggest" method="post">
             <input type="text" name="keyword"
                    th:value="${keyword}">
             <input type="submit" value="Search">
@@ -34,8 +34,24 @@
             <th th:utext="${file.filecontent}">File Fulltext</th>
             </p>
         </div>
-
     </tr>
+
+    <hr>
+    <h3>Suggestion Result </h3>
+    <hr>
+
+
+    <tr th:each="file,fileStat : ${suggestflist}">
+        <div class="news">
+            <h4>
+                <div th:utext="${file.title}">File Title</div>
+            </h4>
+            <p>
+            <th th:utext="${file.filecontent}">File Fulltext</th>
+            </p>
+        </div>
+    </tr>
+
 </div>
 
 </body>

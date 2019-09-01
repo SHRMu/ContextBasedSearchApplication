@@ -1,4 +1,4 @@
-package cn.pan.congiguration;
+package de.tu.darmstadt.configuration;
 
 import lombok.Getter;
 import lombok.Setter;

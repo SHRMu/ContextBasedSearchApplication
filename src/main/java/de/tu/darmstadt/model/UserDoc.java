@@ -1,4 +1,4 @@
-package cn.pan.model;
+package de.tu.darmstadt.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

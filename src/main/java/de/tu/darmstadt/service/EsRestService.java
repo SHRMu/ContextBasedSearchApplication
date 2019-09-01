@@ -1,6 +1,6 @@
-package cn.pan.service;
+package de.tu.darmstadt.service;
 
-import cn.pan.congiguration.EsConfiguration;
+import de.tu.darmstadt.configuration.EsConfiguration;
 import org.apache.http.HttpHost;
 import org.apache.log4j.Logger;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
