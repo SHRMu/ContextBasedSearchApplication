@@ -42,7 +42,7 @@ body ul li{
 /*    color: #000;*/
 /*}*/
 
-.searchbox .search_btn{
+.searchbox input[type="submit"]{
     height: 30px;
     width: 14%;
     outline: none;

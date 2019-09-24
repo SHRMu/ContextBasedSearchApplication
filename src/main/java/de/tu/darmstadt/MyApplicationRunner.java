@@ -123,7 +123,7 @@ public class MyApplicationRunner implements ApplicationRunner {
                 ModelService.session = savedModelBundle.session();
 
             } else {
-                logger.error("索引初始化失败.");
+                logger.error("Failed to init the index...");
             }
 
         } catch (IOException e) {

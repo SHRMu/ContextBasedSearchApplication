@@ -12,7 +12,7 @@ public class SearchController {
 
     @RequestMapping(value = "/data", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject TestAjax(@RequestBody Search search, HttpServletRequest request){
+    public JSONObject searchData(@RequestBody Search search, HttpServletRequest request){
         String keyword = search.getKeyword();
         System.out.println(keyword);
         JSONObject json = new JSONObject();
