@@ -1,6 +1,6 @@
 package de.tu.darmstadt.controller;
 
-import de.tu.darmstadt.service.ModelService;
+import de.tu.darmstadt.service.ModelPredService;
 import de.tu.darmstadt.service.EsRestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +14,9 @@ import java.util.Map;
 @Controller
 @RequestMapping
 public class IndexController {
+
+    public static Map<String, Integer> char2int = null;
+    public static Map<Integer, String> int2char = null;
 
     public static Map<String, Integer> word2int = null;
     public static Map<Integer, String> int2word = null;
@@ -43,7 +46,7 @@ public class IndexController {
         long start = System.currentTimeMillis();
         int int_keyword = word2int.get(keyword.split(" ")[0].toLowerCase());
         System.out.println("time for word2int : "+ Long.toString(System.currentTimeMillis() - start));
-        int[] maxWords = ModelService.getMaxWords(int_keyword);
+        int[] maxWords = ModelPredService.getNextWord(int_keyword);
         System.out.println("time to getMaxWords : "+ Long.toString(System.currentTimeMillis() - start));
         String suggest = keyword + " " + int2word.get(maxWords[1]);
         System.out.println(keyword);

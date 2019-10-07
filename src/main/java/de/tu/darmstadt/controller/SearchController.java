@@ -15,6 +15,8 @@ public class SearchController {
     public JSONObject searchData(@RequestBody Search search, HttpServletRequest request){
         String keyword = search.getKeyword();
         System.out.println(keyword);
+
+
         JSONObject json = new JSONObject();
         json.put("result","value");
         return json;

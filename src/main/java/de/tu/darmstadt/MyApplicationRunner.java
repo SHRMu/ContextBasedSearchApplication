@@ -1,11 +1,12 @@
 package de.tu.darmstadt;
 
+import de.tu.darmstadt.Utils.FileLoader;
 import de.tu.darmstadt.controller.IndexController;
 import de.tu.darmstadt.dao.JDBCNews;
 import de.tu.darmstadt.model.NewsDoc;
 import de.tu.darmstadt.model.UserDoc;
 import de.tu.darmstadt.service.EsRestService;
-import de.tu.darmstadt.service.ModelService;
+import de.tu.darmstadt.service.ModelPredService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.elasticsearch.common.xcontent.XContentBuilder;
@@ -18,11 +19,15 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
+import org.tensorflow.Graph;
 import org.tensorflow.SavedModelBundle;
+import org.tensorflow.Session;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -106,21 +111,17 @@ public class MyApplicationRunner implements ApplicationRunner {
                 System.out.println("selected news doc "+ fileList.size());
                 restService.indexDoc("userdoc", "file", fileList);
 
-                //建立映射
-                IndexController.word2int = new HashMap<>();
-                IndexController.int2word = new HashMap<>();
-                BufferedReader br = new BufferedReader(new FileReader("D:\\Github\\esfilesearch\\src\\main\\resources\\mymodel\\allWords.txt"));
-                int count = 0;
-                String line = null;
-                while ((line = br.readLine())!=null){
-                    IndexController.word2int.put(line, count);
-                    IndexController.int2word.put(count, line);
-                    count ++;
-                }
+                //init char and word dictionary
+                FileLoader.loadChars();
+                FileLoader.loadWords();
 
-                //建立session
+                //laod model file and init session
+                Graph graph = new Graph();
+                graph.importGraphDef(Files.readAllBytes(Paths.get("./src/main/resources/charmodel/char_model.pb")));
+                ModelPredService.charSess = new Session(graph);
+
                 SavedModelBundle savedModelBundle = SavedModelBundle.load("./src/main/resources/mymodel","myTag");
-                ModelService.session = savedModelBundle.session();
+                ModelPredService.wordSess = savedModelBundle.session();
 
             } else {
                 logger.error("Failed to init the index...");

@@ -18,7 +18,7 @@ public class JDBCNews implements INewsDAO {
 
     @Override
     public NewsDoc getNewsDoc(Integer news_id) {
-        String SQL = "SELECT * FROM news_data_10000 WHERE news_id = ? ";
+        String SQL = "SELECT * FROM washingtonpost_21855 WHERE news_id = ? ";
         NewsDoc newsDoc = jdbcTemplateObj.queryForObject(SQL, new Object[]{news_id}, new NewsMapper());
         return newsDoc;
     }
@@ -28,7 +28,7 @@ public class JDBCNews implements INewsDAO {
     *
     * */
     public  List<NewsDoc>  getWorldNewsDoc(){
-        String SQL = "SELECT * FROM news_data_10000 WHERE news_type LIKE 'world%' ";
+        String SQL = "SELECT * FROM washingtonpost_21855 WHERE news_type LIKE 'world' ";
         List<NewsDoc> query = jdbcTemplateObj.query(SQL, new NewsMapper());
         return query;
     }

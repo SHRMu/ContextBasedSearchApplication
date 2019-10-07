@@ -67,8 +67,6 @@
             <version>3.4.0</version>
         </dependency>
 
-
-
         <dependency>
             <groupId>org.apache.tika</groupId>
             <artifactId>tika-core</artifactId>
@@ -133,8 +131,6 @@
             <artifactId>libtensorflow_jni</artifactId>
             <version>1.14.0</version>
         </dependency>
-
-
 
         <!-- elasticsearch dependencies -->
         <dependency>
