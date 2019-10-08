@@ -15,18 +15,14 @@ import java.util.Map;
 @RequestMapping
 public class IndexController {
 
-    public static Map<String, Integer> char2int = null;
-    public static Map<Integer, String> int2char = null;
 
-    public static Map<String, Integer> word2int = null;
-    public static Map<Integer, String> int2word = null;
 
     @Autowired
     EsRestService restService;
 
     @RequestMapping("/")
     public String index() {
-        return "index";
+        return "test";
     }
 
     @RequestMapping("/search")
@@ -40,32 +36,27 @@ public class IndexController {
         return "result";
     }
 
-    @RequestMapping("/suggest")
-    public String suggest(Model model,
-                         @RequestParam("keyword") String keyword) {
-        long start = System.currentTimeMillis();
-        int int_keyword = word2int.get(keyword.split(" ")[0].toLowerCase());
-        System.out.println("time for word2int : "+ Long.toString(System.currentTimeMillis() - start));
-        int[] maxWords = ModelPredService.getNextWord(int_keyword);
-        System.out.println("time to getMaxWords : "+ Long.toString(System.currentTimeMillis() - start));
-        String suggest = keyword + " " + int2word.get(maxWords[1]);
-        System.out.println(keyword);
-        String[] searchFields = {"title", "filecontent"};
-        ArrayList<Map<String, Object>> fileList = restService.searchDocs("userdoc",
-                keyword, searchFields, 1, 10);
-        ArrayList<Map<String, Object>> suggestFileList = restService.searchDocs("userdoc",
-                suggest, searchFields, 1, 10);
-        model.addAttribute("flist", fileList);
-        model.addAttribute("keyword", keyword);
-        model.addAttribute("suggestflist", suggestFileList);
-        model.addAttribute("suggest",suggest);
-        System.out.println(suggest);
-        return "suggest.html.bak";
-    }
-
-    @RequestMapping("/test")
-    public String Test(){
-        return "test";
-    }
+//    @RequestMapping("/suggest")
+//    public String suggest(Model model,
+//                         @RequestParam("keyword") String keyword) {
+//        long start = System.currentTimeMillis();
+//        int int_keyword = word2int.get(keyword.split(" ")[0].toLowerCase());
+//        System.out.println("time for word2int : "+ Long.toString(System.currentTimeMillis() - start));
+//        int[] maxWords = ModelPredService.getNextWord(int_keyword);
+//        System.out.println("time to getMaxWords : "+ Long.toString(System.currentTimeMillis() - start));
+//        String suggest = keyword + " " + int2word.get(maxWords[1]);
+//        System.out.println(keyword);
+//        String[] searchFields = {"title", "filecontent"};
+//        ArrayList<Map<String, Object>> fileList = restService.searchDocs("userdoc",
+//                keyword, searchFields, 1, 10);
+//        ArrayList<Map<String, Object>> suggestFileList = restService.searchDocs("userdoc",
+//                suggest, searchFields, 1, 10);
+//        model.addAttribute("flist", fileList);
+//        model.addAttribute("keyword", keyword);
+//        model.addAttribute("suggestflist", suggestFileList);
+//        model.addAttribute("suggest",suggest);
+//        System.out.println(suggest);
+//        return "suggest.html.bak";
+//    }
 
 }
