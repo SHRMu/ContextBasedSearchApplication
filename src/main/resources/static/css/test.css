@@ -6,18 +6,77 @@ body, ul, li {
     padding: 0;
 }
 
-body{
-    font-size:14px;
-    font-family:sumsun,arial;
-    color:#666666;
+.gover_search{
+    /*position:relative;*/
+    z-index:99;
+    width: 100%;
+    height:60px;
+    padding-left:30px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #cccccc;
+}
+
+.logo {
+    float: left;
+    width: 100px;
+}
+
+.logo a:link, .logo a:visited {
+    text-decoration: none;
+    color: #008040;
+}
+
+.gover_search_form{
+    float: left;
+    margin-top: 20px;
+    margin-left: 30px;
+    border: 1px solid #008040;
+    height: 30px;
+    background-color: #ffffff;
+}
+
+.gover_search .input_search_key{
+    float:left;
+    width:420px;
+    height:24px;
+    padding:2px;
+    border:1px solid #cccccc;
+    line-height:20px;
     background:#FFFFFF;
 }
 
-.gover_search{ position:relative; z-index:99; height:63px; padding:15px 0 0 20px; border:1px solid #b8cfe6; border-bottom:0; }
-.gover_search_form{height:36px;}
-.gover_search .search_t{ float:left; width:112px; line-height:26px; color:#666666;}
-.gover_search .input_search_key{ float:left; width:462px; height:18px; padding:3px; margin-right:5px; border:1px solid #cccccc; line-height:18px; background:#FFFFFF;}
-.gover_search .search_btn{ float:left; width:68px; height:26px; overflow:hidden; border:1px solid #cccccc; text-align:center; color:#ff3300; letter-spacing:5px; cursor:pointer; font-weight:bold;}
-.gover_search .search_suggest{ position:absolute; z-index:999; left:132px; top:41px; width:468px; border:1px solid #999999; display:none; }
-.gover_search .search_suggest li{height:24px; overflow:hidden; padding-left:3px; line-height:24px; background:#FFFFFF; cursor:default;}
-.gover_search .search_suggest li.hover{background:#DDDDDD;}
+.gover_search .search_btn{
+    width: 75px;
+    line-height: 30px;
+    background-color: #008040;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    color: #ffffff;
+    float: right;
+    overflow:hidden;
+    text-align:center;
+    cursor:pointer;
+}
+.gover_search .search_suggest{
+    position: absolute;
+    z-index: 999;
+    left: 160px;
+    top: 70px;
+    width: 424px;
+    border: 1px solid #999999;
+    display:none;
+}
+.gover_search .search_suggest li{
+    height:24px;
+    overflow:hidden;
+    padding-left:3px;
+    line-height:24px;
+    background:#FFFFFF;
+    cursor:default;
+}
+.gover_search .search_suggest li.hover{
+    background:#DDDDDD;
+}

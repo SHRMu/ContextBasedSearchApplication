@@ -15,8 +15,6 @@ import java.util.Map;
 @RequestMapping
 public class IndexController {
 
-
-
     @Autowired
     EsRestService restService;
 

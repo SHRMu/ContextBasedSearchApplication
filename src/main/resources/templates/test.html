@@ -10,11 +10,16 @@
 <body>
 
 <div class="gover_search">
-    <div class="gover_search_form clearfix">
+    <div class="logo">
+        <h2>
+            <a href="/">News Search</a>
+        </h2>
+    </div>
+    <div class="gover_search_form">
         <form action="/search" method="post" autocomplete="off">
-            <span class="search_t">Search Input</span>
             <input type="text" name="keyword" class="input_search_key" id="gover_search_key" placeholder="please input keywords" />
-            <button type="submit" class="search_btn">Go</button>
+<!--            <button type="submit" class="search_btn">Go</button>-->
+            <input type="submit" class="search_btn" value="Search">
         </form>
         <div class="search_suggest" id="gov_search_suggest">
             <ul>
