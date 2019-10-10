@@ -1,4 +1,4 @@
-package de.tu.darmstadt.Utils;
+package de.tu.darmstadt.utils;
 
 import java.util.*;
 

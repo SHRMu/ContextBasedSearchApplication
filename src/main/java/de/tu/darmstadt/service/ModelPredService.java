@@ -1,6 +1,6 @@
 package de.tu.darmstadt.service;
 
-import de.tu.darmstadt.Utils.MapUtil;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.tensorflow.Session;
@@ -93,5 +93,10 @@ public class ModelPredService {
         indices.copyTo(words_sim);
 
 //        return words_sim[0];
+    }
+
+    @Test
+    public void test(){
+
     }
 }

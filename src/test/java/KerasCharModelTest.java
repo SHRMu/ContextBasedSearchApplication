@@ -1,5 +1,3 @@
-package de.tu.darmstadt.service;
-
 import org.tensorflow.Graph;
 import org.tensorflow.Session;
 import org.tensorflow.Tensor;
@@ -7,7 +5,7 @@ import org.tensorflow.Tensor;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class DemoService {
+public class KerasCharModelTest {
 
     public static void main(String[] args) throws Exception {
         try(Graph graph = new Graph()){

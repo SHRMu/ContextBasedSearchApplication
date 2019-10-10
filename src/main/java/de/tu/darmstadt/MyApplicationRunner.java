@@ -1,7 +1,6 @@
 package de.tu.darmstadt;
 
-import de.tu.darmstadt.Utils.FileLoader;
-import de.tu.darmstadt.controller.IndexController;
+import de.tu.darmstadt.utils.FileLoader;
 import de.tu.darmstadt.dao.JDBCNews;
 import de.tu.darmstadt.model.NewsDoc;
 import de.tu.darmstadt.model.UserDoc;
@@ -23,13 +22,10 @@ import org.tensorflow.Graph;
 import org.tensorflow.SavedModelBundle;
 import org.tensorflow.Session;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @Component
