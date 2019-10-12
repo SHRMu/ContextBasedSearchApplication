@@ -18,7 +18,6 @@
     <div class="gover_search_form">
         <form action="/search" method="post" autocomplete="off">
             <input type="text" name="keyword" class="input_search_key" id="gover_search_key" placeholder="please input keywords" />
-<!--            <button type="submit" class="search_btn">Go</button>-->
             <input type="submit" class="search_btn" value="Search">
         </form>
         <div class="search_suggest" id="gov_search_suggest">
@@ -138,9 +137,9 @@
              data: JSON.stringify(search),
              // data: search,
             success: function(data){
-                console.log(data);
-                console.log(data[0]);
-                console.log(data[0].word);
+                // console.log(data);
+                // console.log(data[0]);
+                // console.log(data[0].word);
                 var aData = [];
                 for (var i = 0; i<data.length; i++){
                     if (data[i].word != null){

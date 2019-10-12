@@ -63,6 +63,35 @@ body {
     color: #ff0000;
 }
 
+#gov_search_suggest{
+    position: absolute;
+    z-index: 999;
+    left: 160px;
+    top: 70px;
+    width: 424px;
+    border: 1px solid #999999;
+    display:none;
+}
+
+#gov_search_suggest ul{
+    margin: 0;
+    padding: 0;
+}
+
+#gov_search_suggest ul li{
+    width: 424px;
+    height:24px;
+    font-size: 20px;
+    overflow:hidden;
+    padding-left:3px;
+    line-height:24px;
+    background:#FFFFFF;
+    cursor:default;
+}
+#gov_search_suggest ul li.hover{
+    background:#DDDDDD;
+}
+
 .newsist {
     width: 700px;
     margin-top: 10px;

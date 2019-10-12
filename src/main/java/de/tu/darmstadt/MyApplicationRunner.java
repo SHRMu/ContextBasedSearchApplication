@@ -42,7 +42,7 @@ public class MyApplicationRunner implements ApplicationRunner {
         if (restService.existIndex("userdoc"))
             restService.deleteIndex("userdoc");
 
-        //设置mapping
+        //mapping
         XContentBuilder builder = null;
         try {
             builder = XContentFactory.jsonBuilder();
@@ -53,13 +53,13 @@ public class MyApplicationRunner implements ApplicationRunner {
                     builder.startObject("title");
                     {
                         builder.field("type", "text");
-                        builder.field("analyzer", "ik_max_word");
+//                        builder.field("analyzer", "ik_max_word");
                     }
                     builder.endObject();
                     builder.startObject("filecontent");
                     {
                         builder.field("type", "text");
-                        builder.field("analyzer", "ik_max_word");
+//                        builder.field("analyzer", "ik_max_word");
                         builder.field("term_vector", "with_positions_offsets");
                     }
                     builder.endObject();
@@ -68,7 +68,6 @@ public class MyApplicationRunner implements ApplicationRunner {
             }
             builder.endObject();
 
-            //初始化索引
             Boolean isSuccess = restService.initIndex("userdoc",
                     "file", 3, 0, builder);
 
@@ -84,15 +83,6 @@ public class MyApplicationRunner implements ApplicationRunner {
                 ArrayList<String> fileList = new ArrayList<>();
                 ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
                 JDBCNews JDBCNews = (JDBCNews) context.getBean("JDBCNews");
-
-//                for (int id = 5914747; id <= 5915747; id++) {
-//                    NewsDoc newsDoc = JDBCNews.getNewsDoc(id);
-//                    UserDoc userDoc = new UserDoc();
-//                    userDoc.setTitle(newsDoc.getNews_title());
-//                    userDoc.setFilecontent(newsDoc.getNews_fulltext());
-//                    String json = objMapper.writeValueAsString(userDoc);
-//                    fileList.add(json);
-//                }
 
                 List<NewsDoc> allDoc = JDBCNews.getWorldNewsDoc();
                 for (NewsDoc doc:

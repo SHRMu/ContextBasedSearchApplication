@@ -29,24 +29,48 @@ public class ModelPredService {
      */
     public ArrayList invokeModel(String inputStr){
         String[] keywords = inputStr.split(" ");
+        StringBuilder sb = new StringBuilder();
+        ArrayList<String> preWords = new ArrayList<>();
+        for (int i = 0; i < keywords.length-1; i++) {
+            sb.append(keywords[i]+" ");
+            preWords.add(keywords[i]);
+        }
+
         ArrayList<String> predicts = new ArrayList();
+        ArrayList<String> outputs = new ArrayList<>();
         //get last keyword
         String keyword = keywords[keywords.length - 1].toLowerCase();
         Integer word_index = word2int.get(keyword);
         if (word_index != null){
             //if last keyword is a complete word, then predict based on word model
             predicts = getNextWord(word_index);
-            predicts.replaceAll(item -> item.replace(item,keyword +" "+item));
+            for (String item:
+                    predicts) {
+                if (!preWords.contains(item)){
+                    outputs.add(item);
+                }
+            }
+            outputs.replaceAll(item -> item.replace(item,keyword +" "+item));
         }else {
             //predict the complete word first
             String word = wordCompletion(keyword);
             word_index = word2int.get(word);
             if (word_index != null){
                 predicts = getNextWord(word_index);
+                for (String item:
+                        predicts) {
+                    if (!preWords.contains(item)){
+                        outputs.add(item);
+                    }
+                }
+                outputs.replaceAll(item -> item.replace(item,keyword +" "+item));
             }
-            predicts.replaceAll(item -> item.replace(item, word + " "+ item));
+            outputs.replaceAll(item -> item.replace(item, word + " "+ item));
         }
-        return predicts;
+        if (sb != null){
+            outputs.replaceAll(item -> item.replace(item, sb + item));
+        }
+        return outputs;
     }
 
     private String wordCompletion(String keyword){
@@ -67,7 +91,7 @@ public class ModelPredService {
         return word;
     }
 
-    private ArrayList getNextWord(int word_index){
+    private ArrayList<String> getNextWord(int word_index){
         int[] inputs = new int[1];
         ArrayList<String> outputs = new ArrayList();
         inputs[0] = word_index;

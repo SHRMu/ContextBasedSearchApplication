@@ -4,7 +4,6 @@ import de.tu.darmstadt.model.Search;
 import de.tu.darmstadt.service.ModelPredService;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.omg.CORBA.DATA_CONVERSION;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
