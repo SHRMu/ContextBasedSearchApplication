@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 @ToString
 @ConfigurationProperties(prefix = "elastic.search")
 public class EsConfiguration {
-
     private String host;
     private int port;
     private String clusterName;

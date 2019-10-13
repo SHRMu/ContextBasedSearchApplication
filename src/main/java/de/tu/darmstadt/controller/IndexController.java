@@ -1,6 +1,6 @@
 package de.tu.darmstadt.controller;
 
-import de.tu.darmstadt.model.Search;
+import de.tu.darmstadt.domain.Search;
 import de.tu.darmstadt.service.EsRestService;
 import de.tu.darmstadt.service.ModelPredService;
 import org.json.simple.JSONArray;

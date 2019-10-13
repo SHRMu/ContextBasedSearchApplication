@@ -1,4 +1,4 @@
-package de.tu.darmstadt.model;
+package de.tu.darmstadt.domain;
 
 public class NewsDoc {
     private int news_id;
@@ -36,15 +36,5 @@ public class NewsDoc {
 
     public void setNews_fulltext(String news_fulltext) {
         this.news_fulltext = news_fulltext;
-    }
-
-    @Override
-    public String toString() {
-        return "NewsDoc{" +
-                "news_id=" + news_id +
-                ", news_type='" + news_type + '\'' +
-                ", news_title='" + news_title + '\'' +
-                ", news_fulltext='" + news_fulltext + '\'' +
-                '}';
     }
 }

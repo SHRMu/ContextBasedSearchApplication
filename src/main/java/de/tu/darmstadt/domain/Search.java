@@ -1,4 +1,4 @@
-package de.tu.darmstadt.model;
+package de.tu.darmstadt.domain;
 
 public class Search {
     private String keyword;

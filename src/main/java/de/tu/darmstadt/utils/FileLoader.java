@@ -2,6 +2,8 @@ package de.tu.darmstadt.utils;
 
 import de.tu.darmstadt.service.ModelPredService;
 import org.junit.Test;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 
 import java.io.*;
 import java.util.HashMap;
@@ -12,7 +14,10 @@ public class FileLoader {
         try {
             ModelPredService.char2int = new HashMap<>();
             ModelPredService.int2char = new HashMap<>();
-            BufferedReader br = new BufferedReader(new FileReader("D:\\Github\\ContextBasedSuggestionSearchEngine\\src\\main\\resources\\charmodel\\allChars.txt"));
+//            BufferedReader br = new BufferedReader(new FileReader("D:\\Github\\ContextBasedSuggestionSearchEngine\\src\\main\\resources\\charmodel\\allChars.txt"));
+            Resource resource = new ClassPathResource("charmodel/allChars.txt");
+            String Path = resource.getFile().getPath();
+            BufferedReader br = new BufferedReader(new FileReader(Path));
             int count = 0;
             String line = null;
             while ((line = br.readLine()) != null) {
@@ -34,7 +39,10 @@ public class FileLoader {
             //建立映射
             ModelPredService.word2int = new HashMap<>();
             ModelPredService.int2word = new HashMap<>();
-            BufferedReader br = new BufferedReader(new FileReader("D:\\Github\\ContextBasedSuggestionSearchEngine\\src\\main\\resources\\mymodel\\allWords.txt"));
+//            BufferedReader br = new BufferedReader(new FileReader("D:\\Github\\ContextBasedSuggestionSearchEngine\\src\\main\\resources\\mymodel\\allWords.txt"));
+            Resource resource = new ClassPathResource("mymodel/allWords.txt");
+            String Path = resource.getFile().getPath();
+            BufferedReader br = new BufferedReader(new FileReader(Path));
             int count = 0;
             String line = null;
             while ((line = br.readLine())!=null){

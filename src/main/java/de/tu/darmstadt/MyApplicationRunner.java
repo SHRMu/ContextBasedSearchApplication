@@ -1,9 +1,9 @@
 package de.tu.darmstadt;
 
+import de.tu.darmstadt.dao.NewsDao;
 import de.tu.darmstadt.utils.FileLoader;
-import de.tu.darmstadt.dao.JDBCNews;
-import de.tu.darmstadt.model.NewsDoc;
-import de.tu.darmstadt.model.UserDoc;
+import de.tu.darmstadt.domain.NewsDoc;
+import de.tu.darmstadt.domain.UserDoc;
 import de.tu.darmstadt.service.EsRestService;
 import de.tu.darmstadt.service.ModelPredService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,15 +13,16 @@ import org.elasticsearch.common.xcontent.XContentFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ResourceUtils;
 import org.tensorflow.Graph;
 import org.tensorflow.SavedModelBundle;
 import org.tensorflow.Session;
+import ucar.ma2.ArrayDouble;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -34,6 +35,8 @@ public class MyApplicationRunner implements ApplicationRunner {
 
     @Autowired
     EsRestService restService;
+    @Autowired
+    NewsDao newsDao;
 
     @Override
     public void run(ApplicationArguments var1) throws Exception {
@@ -42,7 +45,7 @@ public class MyApplicationRunner implements ApplicationRunner {
         if (restService.existIndex("userdoc"))
             restService.deleteIndex("userdoc");
 
-        //mapping
+        //mapper
         XContentBuilder builder = null;
         try {
             builder = XContentFactory.jsonBuilder();
@@ -81,18 +84,19 @@ public class MyApplicationRunner implements ApplicationRunner {
                 ObjectMapper objMapper = new ObjectMapper();
 
                 ArrayList<String> fileList = new ArrayList<>();
-                ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-                JDBCNews JDBCNews = (JDBCNews) context.getBean("JDBCNews");
 
-                List<NewsDoc> allDoc = JDBCNews.getWorldNewsDoc();
+                List<NewsDoc> allDoc = newsDao.selectAll();
+                System.out.println("washingtonpost_21855 allDoc Size : "+ String.valueOf(allDoc.size()) );
                 for (NewsDoc doc:
                      allDoc) {
-                    UserDoc userDoc = new UserDoc();
-                    userDoc.setTitle(doc.getNews_title());
-                    userDoc.setFilecontent(doc.getNews_fulltext());
-                    String json = objMapper.writeValueAsString(userDoc);
-                    fileList.add(json);
-                    System.out.println(doc.getNews_title());
+                    if (doc.getNews_title()!=null && doc.getNews_fulltext()!=null){
+                        UserDoc userDoc = new UserDoc();
+                        userDoc.setTitle(doc.getNews_title());
+                        userDoc.setFilecontent(doc.getNews_fulltext());
+                        String json = objMapper.writeValueAsString(userDoc);
+                        fileList.add(json);
+                        System.out.println(doc.getNews_title());
+                    }
                 }
                 System.out.println("selected news doc "+ fileList.size());
                 restService.indexDoc("userdoc", "file", fileList);
@@ -101,12 +105,18 @@ public class MyApplicationRunner implements ApplicationRunner {
                 FileLoader.loadChars();
                 FileLoader.loadWords();
 
-                //laod model file and init session
+                //laod domain file and init session
                 Graph graph = new Graph();
-                graph.importGraphDef(Files.readAllBytes(Paths.get("./src/main/resources/charmodel/char_model.pb")));
+//                graph.importGraphDef(Files.readAllBytes(Paths.get("./src/main/resources/charmodel/char_model.pb")));
+                Resource charModelPath = new ClassPathResource("charmodel/char_model.pb");
+                String Path = charModelPath.getFile().getPath();
+                graph.importGraphDef(Files.readAllBytes(Paths.get(Path)));
                 ModelPredService.charSess = new Session(graph);
 
-                SavedModelBundle savedModelBundle = SavedModelBundle.load("./src/main/resources/mymodel","myTag");
+//                SavedModelBundle savedModelBundle = SavedModelBundle.load("./src/main/resources/mymodel","myTag");
+                Resource wordModelPath = new ClassPathResource("mymodel");
+                Path = wordModelPath.getFile().getPath();
+                SavedModelBundle savedModelBundle = SavedModelBundle.load(Path,"myTag");
                 ModelPredService.wordSess = savedModelBundle.session();
 
             } else {

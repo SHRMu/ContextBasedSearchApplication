@@ -42,7 +42,7 @@ public class ModelPredService {
         String keyword = keywords[keywords.length - 1].toLowerCase();
         Integer word_index = word2int.get(keyword);
         if (word_index != null){
-            //if last keyword is a complete word, then predict based on word model
+            //if last keyword is a complete word, then predict based on word domain
             predicts = getNextWord(word_index);
             for (String item:
                     predicts) {
@@ -65,7 +65,7 @@ public class ModelPredService {
                 }
                 outputs.replaceAll(item -> item.replace(item,keyword +" "+item));
             }
-            outputs.replaceAll(item -> item.replace(item, word + " "+ item));
+//            outputs.replaceAll(item -> item.replace(item, word + " "+ item));
         }
         if (sb != null){
             outputs.replaceAll(item -> item.replace(item, sb + item));

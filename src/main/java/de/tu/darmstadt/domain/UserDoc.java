@@ -1,4 +1,4 @@
-package de.tu.darmstadt.model;
+package de.tu.darmstadt.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class UserDoc {
     private String title;
-    private String news_type;
+    private String newsType;
     private String filecontent;
 
     public void setTitle(String title) {
@@ -23,7 +23,7 @@ public class UserDoc {
     }
 
     public void setType(String type){
-        this.news_type = type;
+        this.newsType = type;
     }
 
     @Override
