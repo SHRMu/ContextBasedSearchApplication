@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping
@@ -29,9 +31,13 @@ public class IndexController {
     }
 
     @RequestMapping("/search")
-    public String search(Model model,
-                         @RequestParam("keyword") String keyword) {
+    public String search(Model model, @RequestParam("keyword") String keyword) {
         String[] searchFields = {"title", "filecontent"};
+        Pattern p = Pattern.compile("\\_");
+        Matcher m = p.matcher(keyword);
+        while (m.find()){
+            keyword = m.replaceAll(" ");
+        }
         ArrayList<Map<String, Object>> fileList = restService.searchDocs("userdoc",
                 keyword, searchFields, 1, 10);
         model.addAttribute("flist", fileList);

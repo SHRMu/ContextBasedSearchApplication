@@ -11,7 +11,7 @@ import org.tensorflow.*;
  */
 public class TFWordModelTest {
 
-    // top_k param in training model, which fixed before model training
+    // top_k param in training domain, which fixed before domain training
     public static final int TOP_SIZE = 8;
 
     public static void getSimilarityWord(String str) {
@@ -20,7 +20,7 @@ public class TFWordModelTest {
         int input_size = inputStr.length;
         int[] input = new int[input_size];
         for (int i = 0; i < input_size; i++) {
-            input[i] = ModelPredService.word2int.get(inputStr[i].toLowerCase());
+            input[i] = ModelPredService.entity2int.get(inputStr[i].toLowerCase());
         }
         SavedModelBundle savedModelBundle = SavedModelBundle.load("./src/main/resources/mymodel","myTag");
 //        Graph graph = savedModelBundle.graph();
@@ -44,7 +44,7 @@ public class TFWordModelTest {
             System.out.println("————————————————————————————————————————————————");
             System.out.println("the similarity result for input ##"+ inputStr[i]+"## as following :");
             for (int j = 0; j < TOP_SIZE; j++) {
-                System.out.println("word :"+ModelPredService.int2word.get(ans[i][j])+" with similarity value :"+sim[i][j]);
+                System.out.println("word :"+ModelPredService.int2entity.get(ans[i][j])+" with similarity value :"+sim[i][j]);
             }
             System.out.println("————————————————————————————————————————————————");
         }

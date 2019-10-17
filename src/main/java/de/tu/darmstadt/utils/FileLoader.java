@@ -10,35 +10,12 @@ import java.util.HashMap;
 
 public class FileLoader {
 
-    public static void loadChars() {
-        try {
-            ModelPredService.char2int = new HashMap<>();
-            ModelPredService.int2char = new HashMap<>();
-//            BufferedReader br = new BufferedReader(new FileReader("D:\\Github\\ContextBasedSuggestionSearchEngine\\src\\main\\resources\\charmodel\\allChars.txt"));
-            Resource resource = new ClassPathResource("charmodel/allChars.txt");
-            String Path = resource.getFile().getPath();
-            BufferedReader br = new BufferedReader(new FileReader(Path));
-            int count = 0;
-            String line = null;
-            while ((line = br.readLine()) != null) {
-                String[] items = line.split(":");
-                ModelPredService.char2int.put(items[0],count);
-                ModelPredService.int2char.put(count,items[0]);
-                count ++ ;
-
-            }
-            br.close();
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-        System.out.println(ModelPredService.char2int);
-    }
-
     public static void loadWords(){
         try {
-            //建立映射
-            ModelPredService.word2int = new HashMap<>();
-            ModelPredService.int2word = new HashMap<>();
+
+            ModelPredService.entity2int = new HashMap<>();
+            ModelPredService.int2entity = new HashMap<>();
+
 //            BufferedReader br = new BufferedReader(new FileReader("D:\\Github\\ContextBasedSuggestionSearchEngine\\src\\main\\resources\\mymodel\\allWords.txt"));
             Resource resource = new ClassPathResource("mymodel/allWords.txt");
             String Path = resource.getFile().getPath();
@@ -46,15 +23,15 @@ public class FileLoader {
             int count = 0;
             String line = null;
             while ((line = br.readLine())!=null){
-                ModelPredService.word2int.put(line, count);
-                ModelPredService.int2word.put(count, line);
+                ModelPredService.entity2int.put(line, count);
+                ModelPredService.int2entity.put(count, line);
                 count ++;
+
             }
             br.close();
         }catch (IOException e){
             e.printStackTrace();
         }
-
     }
 
     @Test

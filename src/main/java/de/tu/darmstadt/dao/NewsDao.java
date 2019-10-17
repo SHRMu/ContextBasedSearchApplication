@@ -13,6 +13,7 @@ public interface NewsDao{
     @Select("select news_id, news_type, news_title, news_fulltext from washingtonpost_21855")
     List<NewsDoc> selectAll();
 
-    List<NewsDoc> selectByType(String type);
+    @Select("select news_id, news_type, news_title, news_fulltext from washingtonpost_21855 where news_type like 'world'")
+    List<NewsDoc> selectByType();
 
 }

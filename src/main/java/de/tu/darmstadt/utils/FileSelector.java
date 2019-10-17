@@ -4,13 +4,22 @@ import org.junit.Test;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class FileSelector {
 
+    public static BufferedReader getInputStream(String inputFile) throws Exception{
+        BufferedInputStream bis = new BufferedInputStream(new FileInputStream(new File(inputFile)));
+        return new BufferedReader(new InputStreamReader(bis, "utf-8"), 10*1024*1024);
+    }
+
     public static void largeFileIO(String inputFile, String outputFile){
         try {
-            BufferedInputStream bis = new BufferedInputStream(new FileInputStream(new File(inputFile)));
-            BufferedReader in = new BufferedReader(new InputStreamReader(bis, "utf-8"), 10*1024*1024);
+            BufferedReader in = getInputStream(inputFile);
             FileWriter fw = new FileWriter(outputFile);
             int count = 0;
             while (in.ready()){
@@ -25,7 +34,7 @@ public class FileSelector {
 //                        System.out.println(count);
 //                    }
                     }
-                } catch (ArrayIndexOutOfBoundsException e){
+                } catch (Exception e){
                     System.out.println(line);
                 }
 //                System.out.println(url);
@@ -33,7 +42,7 @@ public class FileSelector {
             in.close();
             fw.flush();
             fw.close();
-        } catch (IOException e){
+        } catch (Exception e){
             e.printStackTrace();
         }
     }
@@ -84,10 +93,33 @@ public class FileSelector {
     }
 
     @Test
-    public void textFilterTest(){
-        ArrayList textID = getTextID("D:\\TUDa\\DMPR\\Data\\full-news-out.txt");
+    public void textFilterTest() throws Exception{
+        ArrayList textID = getTextID("D:\\TUDa\\DMPR\\Data\\full-news-21855.txt");
         System.out.println(textID.size());
-//        textFilter("D:\\TUDa\\DMPR\\Data\\text", textID);
+        BufferedReader in = getInputStream("D:\\TUDa\\DMPR\\Data\\doc_entity_value.txt");
+        FileWriter fw = new FileWriter("D:\\TUDa\\DMPR\\Data\\doc_entity_value_21855.txt");
+        int count = 0;
+        while (in.ready()){
+            String line = in.readLine();
+            Integer newsID;
+            try {
+                newsID = Integer.valueOf(line.split(",")[0]);
+                if (textID.contains(newsID)){
+                    fw.append(line + "\n");
+                    count ++;
+                    if (count%1000 == 0){
+                        System.out.println(count);
+                    }
+                }
+            } catch (Exception e){
+                System.out.println(line);
+            }
+        }
+        System.out.println(count);
+        in.close();
+        fw.flush();
+        fw.close();
+
     }
 
     @Test
@@ -119,6 +151,67 @@ public class FileSelector {
             fw.close();
         }catch (IOException e){
             e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void entity_file() throws Exception{
+        BufferedReader in = getInputStream("D:\\TUDa\\DMPR\\Data\\data-21855\\doc_entity_value_21855.txt");
+        FileWriter fw = new FileWriter("D:\\TUDa\\DMPR\\Data\\data-21855\\news_id_entity_21855.txt");
+        int news_id;
+        String pre_entity = "";
+        String news_entity;
+        Map<Integer, String> map = new HashMap<>();
+        Pattern p0 = Pattern.compile("\\<(.*?)\\>");
+        Pattern p1 = Pattern.compile("\\_\\((.*?)\\)"); //remove ()
+        Matcher m = null;
+        while (in.ready()){
+            String line = in.readLine();
+            String[] split = line.split(",");
+            news_id = Integer.valueOf(split[0]);
+            news_entity = split[1].split(":")[1];
+            m = p0.matcher(news_entity);
+            while(m.find()) {
+                news_entity = m.group(1);
+            }
+            m = p1.matcher(news_entity);
+            while (m.find()){
+                news_entity = m.replaceAll("");
+            }
+            news_entity = news_entity.replaceAll("[^a-zA-Z0-9\\_]", "");
+            if (!map.keySet().contains(news_id)){
+                map.put(news_id, news_entity);
+                pre_entity = news_entity;
+            }else if(!news_entity.equals(pre_entity)){
+                String s = map.get(news_id);
+                StringBuilder sb = new StringBuilder();
+                sb.append(s);
+                sb.append(" ");
+                sb.append(news_entity);
+                map.put(news_id, sb.toString());
+                pre_entity = news_entity;
+            }
+        }
+        Set<Integer> keySet = map.keySet();
+        for (Integer id:
+             keySet) {
+            fw.write(id.toString()+","+map.get(id)+"\n");
+        }
+        in.close();
+        fw.flush();
+        fw.close();
+    }
+
+    @Test
+    public void test01(){
+        Pattern p = Pattern.compile("\\_\\((.*?)\\)");
+        String input = "Democratic_Party_(United_States)";
+        Matcher m = p.matcher(input);
+        while (m.find()){
+            System.out.println(m.group(0));
+            System.out.println(m.group(1));
+            String s = m.replaceAll("");
+            System.out.println(s);
         }
     }
 }

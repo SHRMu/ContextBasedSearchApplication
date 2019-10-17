@@ -86,6 +86,7 @@ public class MyApplicationRunner implements ApplicationRunner {
                 ArrayList<String> fileList = new ArrayList<>();
 
                 List<NewsDoc> allDoc = newsDao.selectAll();
+//                List<NewsDoc> allDoc = newsDao.selectByType();
                 System.out.println("washingtonpost_21855 allDoc Size : "+ String.valueOf(allDoc.size()) );
                 for (NewsDoc doc:
                      allDoc) {
@@ -102,22 +103,13 @@ public class MyApplicationRunner implements ApplicationRunner {
                 restService.indexDoc("userdoc", "file", fileList);
 
                 //init char and word dictionary
-                FileLoader.loadChars();
                 FileLoader.loadWords();
 
-                //laod domain file and init session
-                Graph graph = new Graph();
-//                graph.importGraphDef(Files.readAllBytes(Paths.get("./src/main/resources/charmodel/char_model.pb")));
-                Resource charModelPath = new ClassPathResource("charmodel/char_model.pb");
-                String Path = charModelPath.getFile().getPath();
-                graph.importGraphDef(Files.readAllBytes(Paths.get(Path)));
-                ModelPredService.charSess = new Session(graph);
-
-//                SavedModelBundle savedModelBundle = SavedModelBundle.load("./src/main/resources/mymodel","myTag");
-                Resource wordModelPath = new ClassPathResource("mymodel");
-                Path = wordModelPath.getFile().getPath();
-                SavedModelBundle savedModelBundle = SavedModelBundle.load(Path,"myTag");
-                ModelPredService.wordSess = savedModelBundle.session();
+                SavedModelBundle savedModelBundle = SavedModelBundle.load("./src/main/resources/mymodel","myTag");
+//                Resource wordModelPath = new ClassPathResource("mymodel");
+//                Path = wordModelPath.getFile().getPath();
+//                SavedModelBundle savedModelBundle = SavedModelBundle.load(Path,"myTag");
+                ModelPredService.sess = savedModelBundle.session();
 
             } else {
                 logger.error("Failed to init the index...");
