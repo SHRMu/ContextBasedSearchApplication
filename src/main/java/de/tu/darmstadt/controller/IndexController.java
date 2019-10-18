@@ -31,17 +31,18 @@ public class IndexController {
     }
 
     @RequestMapping("/search")
-    public String search(Model model, @RequestParam("keyword") String keyword) {
+    public String search(Model model, @RequestParam("keyword") String input) {
         String[] searchFields = {"title", "filecontent"};
         Pattern p = Pattern.compile("\\_");
-        Matcher m = p.matcher(keyword);
+        Matcher m = p.matcher(input);
+        String keyword = "";
         while (m.find()){
             keyword = m.replaceAll(" ");
         }
         ArrayList<Map<String, Object>> fileList = restService.searchDocs("userdoc",
                 keyword, searchFields, 1, 10);
         model.addAttribute("flist", fileList);
-        model.addAttribute("keyword", keyword.toLowerCase());
+        model.addAttribute("keyword", input.toLowerCase());
         return "result";
     }
 
@@ -56,7 +57,7 @@ public class IndexController {
         for (String word:
                 predict) {
             data = new JSONObject();
-            data.put("word"," "+word);
+            data.put("word"," "+ word);
             result.add(data);
         }
         System.out.println(request.toString());

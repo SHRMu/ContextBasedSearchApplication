@@ -104,6 +104,7 @@ public class MyApplicationRunner implements ApplicationRunner {
 
                 //init char and word dictionary
                 FileLoader.loadWords();
+                FileLoader.buildTrieTree();
 
                 SavedModelBundle savedModelBundle = SavedModelBundle.load("./src/main/resources/mymodel","myTag");
 //                Resource wordModelPath = new ClassPathResource("mymodel");

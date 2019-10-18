@@ -1,4 +1,5 @@
 donald_trump
+_
 united_states
 associated_press
 democratic_party
@@ -454,7 +455,7 @@ cold_war_ii
 cbs_news
 bill_cosby
 kevin_mccarthy
-standard__poors
+standard_poors
 american_civil_liberties_union
 judith_martin
 nissan
@@ -520,7 +521,7 @@ national_basketball_association
 brookings_institution
 osama_bin_laden
 david_j_pecker
-simon__schuster
+simon_schuster
 social_security_administration
 pacific_ocean
 richard_blumenthal
@@ -1259,7 +1260,7 @@ glenn_kessler
 annapolis
 albert_einstein
 arabs
-fox__friends
+fox_friends
 tony_kushner
 cory_gardner
 national_book_award
@@ -2075,7 +2076,7 @@ salva_kiir_mayardit
 national_treasury_employees_union
 danny_danon
 bill_murray
-barnes__noble
+barnes_noble
 southern_baptist_convention
 republican_governors_association
 norc_at_the_university_of_chicago
@@ -2362,7 +2363,7 @@ naples
 hyattsville
 neil_young
 freedom_party_of_austria
-movement_for_democratic_change__tsvangirai
+movement_for_democratic_change_tsvangirai
 kunduz
 ulysses_s_grant
 baku
@@ -3210,7 +3211,7 @@ mount_etna
 daily_mail
 paul_gosar
 mia_farrow
-w_w_norton__company
+w_w_norton_company
 tom_cole
 migration_policy_institute
 strom_thurmond
@@ -3377,7 +3378,7 @@ michael_lewis
 booksamillion
 hudson_group
 powells_books
-schuler_books__music
+schuler_books_music
 okemos
 jim_bridenstine
 dwayne_johnson
@@ -3517,7 +3518,7 @@ tom_brokaw
 giacomo_puccini
 travel_trailer
 saeb_erekat
-merck__co
+merck_co
 husby
 world_war_iii
 jim_yong_kim
@@ -3786,7 +3787,7 @@ joe_cunningham
 northern_europe
 erik_paulsen
 john_faso
-mckinsey__company
+mckinsey_company
 library_of_congress
 gillian_flynn
 mark_burnett
@@ -3936,7 +3937,7 @@ michael_mcfaul
 kelsea_ballerini
 astana
 melbourne
-dolce__gabbana
+dolce_gabbana
 zelda_fitzgerald
 mark_knight
 herald_sun
@@ -4555,7 +4556,7 @@ kian_tajbakhsh
 janusz_wojnarowicz
 westgate_shopping_mall_attack
 penn_jillette
-dungeons__dragons_iconic_characters
+dungeons_dragons_iconic_characters
 cyrus_vance
 kathryn_harrison
 sidney_davidoff
@@ -4776,7 +4777,7 @@ kassel
 trish_regan
 inca_empire
 yoyo_ma
-boni__liveright
+boni_liveright
 marine_corps_base_camp_lejeune
 maui
 ron_klain
@@ -5018,7 +5019,7 @@ peter_gelb
 luciano_pavarotti
 jason_leopold
 axios
-pacific_gas__electric
+pacific_gas_electric
 elizabeth_taylor
 julianne_moore
 vija_celmins
@@ -5387,7 +5388,7 @@ general_store
 washington_heights
 beltsville
 bethany_beach
-academy_of_television_arts__sciences
+academy_of_television_arts_sciences
 ramstein_air_base
 chris_grayling
 csar_ritz
@@ -5410,7 +5411,7 @@ faith_hill
 altaf_hussain
 vox_media
 asbury_park_press
-mcfarland__company
+mcfarland_company
 eagles
 jon_m_chu
 jessica_biel
@@ -5518,7 +5519,7 @@ superior_electoral_court
 united_states_house_committee_on_the_budget
 riz_ahmed
 iron_patriot
-spiegel__grau
+spiegel_grau
 quebec_city
 cabinet_of_israel
 ingushetia
@@ -6009,7 +6010,7 @@ ryan_carters
 tom_barrasso
 japan_selfdefense_forces
 sadiq_almahdi
-johnson__johnson
+johnson_johnson
 copacabana
 eddie_bernice_johnson
 american_council_on_renewable_energy
@@ -6345,7 +6346,7 @@ derna
 miguel_san
 jeffrey_garten
 fijians
-hootie__the_blowfish
+hootie_the_blowfish
 stephen_a_hurlbut
 ann_cottrell_free
 nipun_akter
@@ -6572,7 +6573,7 @@ jwoww
 germantown
 white_flint_mall
 aadhaar
-dan__shay
+dan_shay
 executive
 whitewater_controversy
 tasnim_news_agency
@@ -6630,7 +6631,7 @@ royal_society_for_the_prevention_of_cruelty_to_animals
 united_states_fifth_fleet
 winona_ryder
 mondelez_international
-procter__gamble
+procter_gamble
 matt_drudge
 arthur_m_sackler_gallery
 atsuma
@@ -7069,7 +7070,7 @@ armani
 alexander_downer
 waziristan
 paul_epworth
-mumford__sons
+mumford_sons
 suva
 stephanie_kifowit
 stanley_cowell
@@ -7381,7 +7382,7 @@ dylan_scott
 peter_jackson
 mass_media
 tidningarnas_telegrambyr
-westin_hotels__resorts
+westin_hotels_resorts
 o_j_simpson_murder_case
 alan_arkin
 walt_whitman
@@ -7851,7 +7852,7 @@ freetown
 patrick_oconnell
 philip_levine
 kunar_province
-bill__melinda_gates_foundation
+bill_melinda_gates_foundation
 sigur_rs
 audrey_ii
 jason_danieley
@@ -8081,7 +8082,7 @@ ben_foster
 chlo_zhao
 justin_peck
 laurent_pelly
-benjamin_moore__co
+benjamin_moore_co
 johnny_carson
 paul_newman
 parmigianoreggiano
@@ -8258,7 +8259,7 @@ michael_pillsbury
 andrew_ross_sorkin
 elissa_silverman
 delta_sigma_theta
-kirkland__ellis
+kirkland_ellis
 national_transportation_safety_board
 j_b_priestley
 moira_buffini
@@ -8281,7 +8282,7 @@ continental_army
 herbert_hoover
 juan_pablo_di_pace
 witney_carson
-daewoo_shipbuilding__marine_engineering
+daewoo_shipbuilding_marine_engineering
 michael_scott
 riksdag
 normani_kordei
@@ -9208,7 +9209,7 @@ horacio_cartes
 luis_castiglioni
 joe_radinovich
 carrie_brownstein
-lukas_nelson__promise_of_the_real
+lukas_nelson_promise_of_the_real
 emanuel_cleaver
 marty_lederman
 declan_donnellan
@@ -9374,7 +9375,7 @@ yolanda_adams
 coldplay
 le_havre
 dick_wolf
-nyc_health__hospitalsbellevue
+nyc_health_hospitalsbellevue
 sofa_vergara
 ted_danson
 dionysus
@@ -10785,7 +10786,7 @@ filip_de_wilde
 tamsin_greig
 steven_pinker
 simon_huck
-edie_brickell__new_bohemians
+edie_brickell_new_bohemians
 komi
 pandeglang_regency
 wildlands
@@ -10890,7 +10891,7 @@ falkland_islands
 robyn
 the_colorado_independent
 nalini_singh
-penn__teller
+penn_teller
 anthony_g_brown
 sharknado
 roger_ebert
@@ -11144,7 +11145,7 @@ xcel_energy
 jbs_sa
 chris_stewart
 silvestre_reyes
-tiffany__co
+tiffany_co
 vlaamse_radio_en_televisieomroeporganisatie
 marcelo_gallardo
 conmebol
@@ -11180,7 +11181,7 @@ allianz
 kevin_m_kruse
 ben_collins
 bakhtawar_bhutto_zardari
-arnold__porter
+arnold_porter
 united_service_organizations
 cinelli
 niteri
@@ -11518,7 +11519,7 @@ canestrelli
 matteson
 marine_corps_air_station_miramar
 mike_d
-covington__burling
+covington_burling
 national_association_of_manufacturers
 colby_college
 nielsen_nv
@@ -11926,7 +11927,7 @@ tiananmen
 sarah_kate_ellis
 pricelinecom
 johns_hopkins_bloomberg_school_of_public_health
-election_systems__software
+election_systems_software
 sarah_maclean
 garuda_indonesia
 jack_evans
@@ -12025,7 +12026,7 @@ pocahontas
 algarve
 abby_sunderland
 deborah_avant
-college_of_william__mary
+college_of_william_mary
 university_of_montana
 patrick_kingsley
 bourj_elbarajneh
@@ -12508,7 +12509,7 @@ hinduja_group
 veterans_benefits_administration
 amir_mirza_hekmati
 little_havana
-ernst__young
+ernst_young
 mattie_blaylock
 jerry_scott
 kragujevac_wild_boars
@@ -12631,8 +12632,8 @@ jordan_peterson
 flagler_beach
 nina_totenberg
 paul_gregory_bootkoski
-irt_broadway__seventh_avenue_line
-best__co
+irt_broadway_seventh_avenue_line
+best_co
 sacaba
 kungsngen
 west_ham_united_fc
@@ -13975,7 +13976,7 @@ macdill_air_force_base
 brooklyn_nets
 jessica_stroup
 ash_carter
-david__david
+david_david
 santa_teresa_del_tuy
 michael_karkoc
 beaverton
@@ -14524,7 +14525,7 @@ oceania
 rms_titanic
 michelle_mcnamara
 karen_kilgariff
-boys__girls_clubs_of_america
+boys_girls_clubs_of_america
 mann_center_for_the_performing_arts
 james_cleveland
 clara_ward
@@ -14705,7 +14706,7 @@ villegailhenc
 university_of_georgia_school_of_law
 reporters_committee_for_freedom_of_the_press
 kazimir_malevich
-williams__connolly
+williams_connolly
 theodore_roosevelt_national_park
 yaracuy
 el_mundo
@@ -15246,7 +15247,7 @@ mike_duggan
 yangshan_port
 o_estado_de_s_paulo
 sam_palladio
-adalah__the_legal_center_for_arab_minority_rights_in_israel
+adalah_the_legal_center_for_arab_minority_rights_in_israel
 marone
 singaporeans
 h_jay_melosh
@@ -15281,7 +15282,7 @@ courteney_cox
 kulanu
 wollongong
 regina_george
-town__country
+town_country
 university_of_duisburgessen
 rochester_institute_of_technology
 st_augustine
@@ -15324,7 +15325,7 @@ baltimore_orioles
 united_nations_population_fund
 vr_group
 american_national_election_studies
-kimpton_hotels__restaurants
+kimpton_hotels_restaurants
 kristin_davis
 john_gorka
 franklin_foer
@@ -15575,7 +15576,7 @@ wakatobi_national_park
 southeast_sulawesi
 national_democratic_institute_for_international_affairs
 democratic_left_alliance
-direction__social_democracy
+direction_social_democracy
 national_turkey_federation
 british_indian_ocean_territory
 maghreb_arabe_press
@@ -15686,7 +15687,7 @@ marnie
 detroit_economic_club
 druk_nyamrup_tshogpa
 iranian_diaspora
-harold__kumar_go_to_white_castle
+harold_kumar_go_to_white_castle
 central_committee_of_the_communist_party_of_the_soviet_union
 werner_heisenberg
 juan_bernat
@@ -16048,7 +16049,7 @@ yemeni_arabic
 ningbo
 devon_bostick
 jack_ingram
-wildfowl__wetlands_trust
+wildfowl_wetlands_trust
 mark_roberts_footballer
 ricardo_arias_caldern
 nuevo_laredo
@@ -16427,7 +16428,7 @@ phumzile_mlambongcuka
 st_cloud
 tessa_hadley
 rita_katz
-national_council_for_the_defense_of_democracy__forces_for_the_defense_of_democracy
+national_council_for_the_defense_of_democracy_forces_for_the_defense_of_democracy
 east_los_angeles
 abdulaziz_komilov
 shavkat_mirziyoyev
@@ -16529,7 +16530,7 @@ coast_guard
 rani_mukerji
 bill_mckibben
 assembly_of_the_republic_of_macedonia
-imro__bulgarian_national_movement
+imro_bulgarian_national_movement
 nick_mickoski
 the_bank_of_new_york_mellon
 stephen_quake
@@ -17006,7 +17007,7 @@ timmins
 heaven_lake
 ha_bnh
 monterey
-national_kitchen__bath_association
+national_kitchen_bath_association
 harold_duane_vietor
 nick_park
 symbiodinium

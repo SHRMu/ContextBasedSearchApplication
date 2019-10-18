@@ -1,11 +1,14 @@
 package de.tu.darmstadt.utils;
 
+import de.tu.darmstadt.domain.EntityTrie;
+import de.tu.darmstadt.domain.TrieTree;
 import de.tu.darmstadt.service.ModelPredService;
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
 import java.io.*;
+import java.util.Collection;
 import java.util.HashMap;
 
 public class FileLoader {
@@ -31,6 +34,26 @@ public class FileLoader {
             br.close();
         }catch (IOException e){
             e.printStackTrace();
+        }
+    }
+
+    //build trie tree based on allWords
+    public static void buildTrieTree(){
+        //init trieTree
+        ModelPredService.trieTree = new TrieTree();
+        Collection<String> entities = ModelPredService.int2entity.values();
+        for (String entity:
+                entities) {
+            String[] words = entity.split("_");
+            for (int i = 0; i < words.length; i++) {
+                ModelPredService.trieTree.insert(words[i]);
+            }
+        }
+        //init entityTree
+        ModelPredService.entityTrie = new EntityTrie();
+        for (String entity:
+                entities ) {
+            ModelPredService.entityTrie.insert(entity);
         }
     }
 

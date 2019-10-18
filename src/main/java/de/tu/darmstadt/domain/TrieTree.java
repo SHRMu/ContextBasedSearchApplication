@@ -190,15 +190,12 @@ public class TrieTree {
 
         HashMap<String,Integer> map= new HashMap<>();
 
-//        for(String key:map.keySet()){
-//            System.out.println(key+" 出现: "+ map.get(key)+"次");
-//        }
+        map=trie.getWordsForPrefix("alibaba");
 
-        map=trie.getWordsForPrefix("bara");
+        System.out.println("words start with ablibaba : ");
 
-        System.out.println("\n包含chin（包括本身）前缀的单词及出现次数：");
         for(String key:map.keySet()){
-            System.out.println(key+" 出现: "+ map.get(key)+"次");
+            System.out.println(key+" occours: "+ map.get(key)+" times");
         }
 
     }

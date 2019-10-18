@@ -2,6 +2,7 @@ package de.tu.darmstadt.domain;
 
 import de.tu.darmstadt.service.ModelPredService;
 import de.tu.darmstadt.utils.FileLoader;
+import org.apache.uima.internal.util.StringUtils;
 import org.junit.Test;
 
 import java.util.Collection;
@@ -64,7 +65,9 @@ public class EntityTrie {
             for (String child:
                  childStr) {
                 if (root.children.get(child) != null){
-                    String tempStr = prefixs + " "+ child;
+                    String tempStr;
+                    tempStr = prefixs + "_"+ child;
+                    tempStr = StringUtils.replaceAll(tempStr, "__", "_");
                     map.putAll(preTraversal(root.children.get(child),tempStr));
                 }
             }
@@ -78,6 +81,7 @@ public class EntityTrie {
 
     private HashMap<String, Integer> getWordsForPrefix(Node root, String prefix){
         HashMap<String, Integer> map = new HashMap<>();
+
         String[] words = prefix.split("_");
 
         if (root.isLeaf == true){
@@ -101,7 +105,7 @@ public class EntityTrie {
             trie.insert(entity);
         }
 
-        HashMap<String, Integer> map = trie.getWordsForPrefix("barack");
+        HashMap<String, Integer> map = trie.getWordsForPrefix("doris");
         for (String key: map.keySet()){
             System.out.println(key+":"+map.get(key));
         }
