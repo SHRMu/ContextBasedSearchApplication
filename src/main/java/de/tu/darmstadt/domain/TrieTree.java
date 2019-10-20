@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.HashMap;
 
 /**
- * prefix trie used for word completion
+ * Word Autocompletion
  */
 public class TrieTree {
 
@@ -21,7 +21,7 @@ public class TrieTree {
             dumpli_num = 0;
             prefix_num = 0;
             isLeaf = false;
-            childs = new Node[36];
+            childs = new Node[28];
         }
     }
 
@@ -31,10 +31,6 @@ public class TrieTree {
         this.root = new Node();
     }
 
-    /**
-     * 插入字串，用循环代替迭代实现
-     * @param word
-     */
     public void insert(String word){
         insert(this.root, word);
     }
@@ -49,7 +45,7 @@ public class TrieTree {
 
         for(int i=0,length=chrs.length; i<length; i++){
             ///用相对于a字母的值作为下标索引，也隐式地记录了该字母的值
-            int index=chrs[i]-'a';
+            int index=chrs[i]-'_';
             try {
                 if(root.childs[index]!=null){
                     ////已经存在了，该子节点prefix_num++
@@ -68,6 +64,7 @@ public class TrieTree {
                 root=root.childs[index];
             }catch (ArrayIndexOutOfBoundsException e){
 //                System.out.println(chrs[i]);
+//                System.out.println(index);
             }
 
         }
@@ -102,7 +99,7 @@ public class TrieTree {
 
             for(int i=0,length=root.childs.length; i<length;i++){
                 if(root.childs[i]!=null){
-                    char ch=(char) (i+'a');
+                    char ch=(char) (i+'_');
                     ////递归调用前序遍历
                     String tempStr=prefixs+ch;
                     map.putAll(preTraversal(root.childs[i], tempStr));
@@ -130,7 +127,7 @@ public class TrieTree {
     private boolean search(Node root,String word){
         char[] chs=word.toLowerCase().toCharArray();
         for(int i=0,length=chs.length; i<length;i++){
-            int index=chs[i]-'a';
+            int index=chs[i]-'_';
             if(root.childs[index]==null){
                 ///如果不存在，则查找失败
                 return false;
@@ -161,7 +158,7 @@ public class TrieTree {
         ////
         for(int i=0, length=chrs.length; i<length; i++){
 
-            int index=chrs[i]-'a';
+            int index=chrs[i]-'_';
             if(root.childs[index]==null){
                 return null;
             }
@@ -182,17 +179,18 @@ public class TrieTree {
         Collection<String> values = ModelPredService.int2entity.values();
         for (String entity:
                 values) {
-            String[] words = entity.split("_");
-            for (int i = 0; i < words.length; i++) {
-                trie.insert(words[i]);
-            }
+//            String[] words = entity.split("_");
+//            for (int i = 0; i < words.length; i++) {
+//                trie.insert(words[i]);
+//            }
+            trie.insert(entity);
         }
 
         HashMap<String,Integer> map= new HashMap<>();
 
-        map=trie.getWordsForPrefix("alibaba");
+        map=trie.getWordsForPrefix("alibaba_g");
 
-        System.out.println("words start with ablibaba : ");
+        System.out.println("words start with alibaba_g : ");
 
         for(String key:map.keySet()){
             System.out.println(key+" occours: "+ map.get(key)+" times");

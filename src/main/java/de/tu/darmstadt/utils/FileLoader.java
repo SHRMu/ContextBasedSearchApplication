@@ -44,10 +44,11 @@ public class FileLoader {
         Collection<String> entities = ModelPredService.int2entity.values();
         for (String entity:
                 entities) {
-            String[] words = entity.split("_");
-            for (int i = 0; i < words.length; i++) {
-                ModelPredService.trieTree.insert(words[i]);
-            }
+//            String[] words = entity.split("_");
+//            for (int i = 0; i < words.length; i++) {
+//                ModelPredService.trieTree.insert(words[i]);
+//            }
+            ModelPredService.trieTree.insert(entity);
         }
         //init entityTree
         ModelPredService.entityTrie = new EntityTrie();

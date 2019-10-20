@@ -9,6 +9,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Set;
 
+/**
+ * Entity Autocompletion
+ */
 public class EntityTrie {
 
     private class Node{

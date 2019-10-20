@@ -106,6 +106,7 @@ public class ModelPredService {
             result.add(str);
             count++;
             if (count>LEN) break;
+            if (sorted.get(str)<0.1) break;
             System.out.println(str+" similarity : "+ sorted.get(str));
         }
         return result;
@@ -150,7 +151,7 @@ public class ModelPredService {
 
         FileLoader.buildTrieTree();
 
-        ArrayList<String> result = entityCompletion(nextEntity, "do");
+        ArrayList<String> result = entityCompletion(nextEntity, "donald_");
 
         System.out.println("=================== entity completion end ===============================");
 
