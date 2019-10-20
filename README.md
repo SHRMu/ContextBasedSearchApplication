@@ -12,7 +12,11 @@ Therefore we consider to merge the machine learning technology, especially embed
 
 2. Tensorflow model was trained and saved in Colaboratory, and then loaded by java code locally.
 
-3. Loading model from java code, the entity autocompletion is implemented with trieTree
+3. Loading model from java code, the entity autocompletion is implemented based on trieTree structure
+
+### Environment
+
+Elasticsearch 7.2.0
 
 ### Entity Embedding
 
@@ -38,6 +42,9 @@ Valid result after 50 epochs with windows_size = 10 :
 ![entity_vector_similarity](https://raw.githubusercontent.com/SHRMu/Entity-Context-Based-Search-Suggestion/master/img/simi.png "entity_vector_similarity")
 
 Website demo
+
+![website_demo](https://raw.githubusercontent.com/SHRMu/Entity-Context-Based-Search-Suggestion/master/img/demo.png "website_demo")
+
 
 
  
