@@ -1,6 +1,6 @@
 package de.tu.darmstadt.controller;
 
-import de.tu.darmstadt.domain.Search;
+import de.tu.darmstadt.domain.SearchData;
 import de.tu.darmstadt.service.EsRestService;
 import de.tu.darmstadt.service.ModelPredService;
 import org.json.simple.JSONArray;
@@ -30,34 +30,42 @@ public class IndexController {
         return "index";
     }
 
+    /**
+     * search new fulltext
+     * @param model
+     * @param input
+     * @return
+     */
     @RequestMapping("/search")
     public String search(Model model, @RequestParam("keyword") String input) {
-        String[] searchFields = {"title", "filecontent"};
+        String[] searchFields = {"news_title", "news_fulltext"};
         Pattern p = Pattern.compile("\\_");
         Matcher m = p.matcher(input);
-        String keyword = "";
+        String keywords = "";
         while (m.find()){
-            keyword = m.replaceAll(" ");
+            keywords = m.replaceAll(" ");
         }
-        ArrayList<Map<String, Object>> fileList = restService.searchDocs("userdoc",
-                keyword, searchFields, 1, 10);
+        ArrayList<Map<String, Object>> fileList = restService.searchDocs("newsdoc",
+                keywords, searchFields, 1, 10);
         model.addAttribute("flist", fileList);
         model.addAttribute("keyword", input.toLowerCase());
         return "result";
     }
 
-    @RequestMapping(value = "/data", method = RequestMethod.POST)
+
+    @RequestMapping(value = "/entity", method = RequestMethod.POST)
     @ResponseBody
-    public JSONArray searchData(@RequestBody Search search, HttpServletRequest request){
-        String keyword = search.getKeyword();
-        System.out.println("input keywords :" + keyword);
+    public JSONArray getEntity(@RequestBody SearchData searchData, HttpServletRequest request){
+        String keyword = searchData.getKeyword();
+        System.out.println("\n### user input keywords :" + keyword);
+        System.out.println("---------------- predict start ------------------");
         ArrayList<String> predict= modelService.invokeModel(keyword);
         JSONArray result = new JSONArray();
         JSONObject data ;
         for (String word:
                 predict) {
             data = new JSONObject();
-            data.put("word"," "+ word);
+            data.put("word", word);
             result.add(data);
         }
         System.out.println(request.toString());

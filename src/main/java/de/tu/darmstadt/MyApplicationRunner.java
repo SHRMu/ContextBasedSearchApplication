@@ -93,13 +93,12 @@ public class MyApplicationRunner implements ApplicationRunner {
                 FileLoader.loadWords();
                 FileLoader.buildTrieTree();
 
-//                SavedModelBundle savedModelBundle = SavedModelBundle.load("./src/main/resources/mymodel","myTag");
+                ModelPredService.sess = SavedModelBundle.load("./src/main/resources/mymodel","myTag").session();
+                logger.info("init tensorflwo session successfully ...");
 
-                //use resource path
-                String modelPath = this.getClass().getClassLoader().getResource("mymodel").getPath();
-                ModelPredService.sess = SavedModelBundle.load(modelPath, "myTag").session();
-
-
+                //todo: how to use relative path
+//                String modelPath = this.getClass().getClassLoader().getResource("mymodel").getPath();
+//                ModelPredService.sess = SavedModelBundle.load(modelPath, "myTag").session();
             } else {
                 logger.error("Failed to init the index...");
             }

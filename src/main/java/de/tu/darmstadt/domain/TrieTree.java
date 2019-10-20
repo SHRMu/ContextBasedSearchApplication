@@ -25,7 +25,7 @@ public class TrieTree {
         }
     }
 
-    private Node root;///树根
+    private Node root; //root point
 
     public TrieTree() {
         this.root = new Node();
@@ -35,32 +35,32 @@ public class TrieTree {
         insert(this.root, word);
     }
     /**
-     * 插入字串，用循环代替迭代实现
+     * insert character
      * @param root
      * @param word
      */
     private void insert(Node root,String word){
-        word=word.toLowerCase();////转化为小写
+        word=word.toLowerCase(); // to lowerCase
         char[] chrs=word.toCharArray();
 
         for(int i=0,length=chrs.length; i<length; i++){
-            ///用相对于a字母的值作为下标索引，也隐式地记录了该字母的值
+            ///use the relative value as index
             int index=chrs[i]-'_';
             try {
                 if(root.childs[index]!=null){
-                    ////已经存在了，该子节点prefix_num++
+                    ////if exist, the prefix num increase
                     root.childs[index].prefix_num++;
                 }else{
-                    ///如果不存在
+                    ///if not exist, create node first
                     root.childs[index]=new Node();
                     root.childs[index].prefix_num++;
                 }
-                ///如果到了字串结尾，则做标记
+                ///remark when it is leaf node
                 if(i==length-1){
                     root.childs[index].isLeaf=true;
                     root.childs[index].dumpli_num++;
                 }
-                ///root指向子节点，继续处理
+                ///root points to child
                 root=root.childs[index];
             }catch (ArrayIndexOutOfBoundsException e){
 //                System.out.println(chrs[i]);
@@ -72,19 +72,18 @@ public class TrieTree {
     }
 
     /**
-     * 遍历Trie树，查找所有的words以及出现次数
+     *
      * @return HashMap<String, Integer> map
      */
     public HashMap<String,Integer> getAllWords(){
 //		HashMap<String, Integer> map=new HashMap<String, Integer>();
-
         return preTraversal(this.root, "");
     }
 
     /**
-     * 前序遍历。。。
-     * @param root		子树根节点
-     * @param prefixs	查询到该节点前所遍历过的前缀
+     *
+     * @param root
+     * @param prefixs
      * @return
      */
     private  HashMap<String,Integer> preTraversal(Node root,String prefixs){
@@ -93,14 +92,14 @@ public class TrieTree {
         if(root!=null){
 
             if(root.isLeaf==true){
-                ////当前即为一个单词
+                ////
                 map.put(prefixs, root.dumpli_num);
             }
 
             for(int i=0,length=root.childs.length; i<length;i++){
                 if(root.childs[i]!=null){
                     char ch=(char) (i+'_');
-                    ////递归调用前序遍历
+                    ////
                     String tempStr=prefixs+ch;
                     map.putAll(preTraversal(root.childs[i], tempStr));
                 }
@@ -112,7 +111,7 @@ public class TrieTree {
 
 
     /**
-     * 判断某字串是否在字典树中
+     *
      * @param word
      * @return true if exists ,otherwise  false
      */
@@ -120,7 +119,7 @@ public class TrieTree {
         return search(this.root, word);
     }
     /**
-     * 查询某字串是否在字典树中
+     *
      * @param word
      * @return true if exists ,otherwise  false
      */
@@ -129,7 +128,7 @@ public class TrieTree {
         for(int i=0,length=chs.length; i<length;i++){
             int index=chs[i]-'_';
             if(root.childs[index]==null){
-                ///如果不存在，则查找失败
+                ///
                 return false;
             }
             root=root.childs[index];
@@ -139,18 +138,18 @@ public class TrieTree {
     }
 
     /**
-     * 得到以某字串为前缀的字串集，包括字串本身！ 类似单词输入法的联想功能
-     * @param prefix 字串前缀
-     * @return 字串集以及出现次数，如果不存在则返回null
+     *
+     * @param prefix
+     * @return
      */
     public HashMap<String, Integer> getWordsForPrefix(String prefix){
         return getWordsForPrefix(this.root, prefix);
     }
     /**
-     * 得到以某字串为前缀的字串集，包括字串本身！
+     *
      * @param root
      * @param prefix
-     * @return 字串集以及出现次数
+     * @return
      */
     private HashMap<String, Integer> getWordsForPrefix(Node root,String prefix){
         HashMap<String, Integer> map=new HashMap<String, Integer>();
@@ -166,8 +165,7 @@ public class TrieTree {
             root=root.childs[index];
 
         }
-        ///结果包括该前缀本身
-        ///此处利用之前的前序搜索方法进行搜索
+
         return preTraversal(root, prefix);
     }
 

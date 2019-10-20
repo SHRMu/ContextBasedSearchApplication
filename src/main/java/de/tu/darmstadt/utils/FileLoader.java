@@ -1,6 +1,5 @@
 package de.tu.darmstadt.utils;
 
-import de.tu.darmstadt.domain.EntityTrie;
 import de.tu.darmstadt.domain.TrieTree;
 import de.tu.darmstadt.service.ModelPredService;
 import org.junit.Test;
@@ -49,12 +48,6 @@ public class FileLoader {
 //                ModelPredService.trieTree.insert(words[i]);
 //            }
             ModelPredService.trieTree.insert(entity);
-        }
-        //init entityTree
-        ModelPredService.entityTrie = new EntityTrie();
-        for (String entity:
-                entities ) {
-            ModelPredService.entityTrie.insert(entity);
         }
     }
 

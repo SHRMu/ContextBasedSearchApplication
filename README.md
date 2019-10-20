@@ -33,7 +33,11 @@ Valid result after 50 epochs with windows_size = 10 :
 
 ### Figure
 
-![entity alt](img/simi.png ''图片title'')
+50 example entity vectors 
+
+![entity_vector_similarity](https://raw.githubusercontent.com/SHRMu/Entity-Context-Based-Search-Suggestion/master/img/simi.png "entity_vector_similarity")
+
+Website demo
 
 
  

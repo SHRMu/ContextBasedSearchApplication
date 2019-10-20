@@ -1,11 +1,9 @@
 package de.tu.darmstadt.service;
 
-import de.tu.darmstadt.domain.EntityTrie;
 import de.tu.darmstadt.domain.TrieTree;
 import de.tu.darmstadt.utils.FileLoader;
-import de.tu.darmstadt.utils.MapUtil;
+import de.tu.darmstadt.utils.MapUtils;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.tensorflow.SavedModelBundle;
 import org.tensorflow.Session;
@@ -22,16 +20,11 @@ public class ModelPredService {
     public static Session sess = null;
 
     public static TrieTree trieTree = null;
-    public static EntityTrie entityTrie = null;
 
-    public static final int LEN = 10;
-    public static final int TOP_K = 17315;
+    public static final int LEN = 10; // suggestion length
+    public static final int TOP_K = 17318; // entity vocab size, fixed before model training
 
-    @Autowired
-    CharService charService;
-
-    public ArrayList<String> invokeModel(String inputStr){
-        //get sperate chars input
+    public ArrayList<String> invokeModel(String inputStr) {
         ArrayList<String> result = new ArrayList<>();
         String[] keywords = inputStr.trim().split(" ");
         int len = keywords.length;
@@ -44,11 +37,9 @@ public class ModelPredService {
                 count++;
                 if (count>10) break;
             }
-        }else if (len >1){
-            int index = entity2int.get(keywords[len-2]);
-            Map<String, Float> nextEntity = getNextEntity(index);
-            result = entityCompletion(nextEntity, keywords[keywords.length - 1]);
-            //combine all
+        }else {
+            Map<String, Float> simiEntity = getSimiEntity(keywords[len-2]);
+            result = entityCompletion(simiEntity, keywords[keywords.length - 1]);
             result.replaceAll(item->item.replace(item, keywords[len-2]+" "+item));
         }
         return result;
@@ -60,8 +51,7 @@ public class ModelPredService {
      * @param chs
      * @return
      */
-    private ArrayList<String> entityCompletion(Map<String, Float> nextEntity, String chs){
-        HashMap<String,Integer> wordsMap ;
+    private ArrayList<String> entityCompletion(Map<String, Float> nextEntity, String chs) {
         HashMap<String,Integer> entityMap ;
 
         Map<String, Float> sorted = new HashMap<>();
@@ -70,63 +60,51 @@ public class ModelPredService {
         if (entity2int.get(chs)!= null)
             return result;
 
-        if (chs.endsWith("_")){
-            entityMap = entityTrie.getWordsForPrefix(chs);
-            if (entityMap != null && entityMap.size()>0){
-                for (String entity: entityMap.keySet()){
-                    System.out.println("#####"+entity+":"+entityMap.get(entity));
-                    if (nextEntity==null){
-                        result.add(entity);
-                    }else {
-                        sorted.put(entity,nextEntity.get(entity));
-                    }
-                }
-            }
-        }else {
-            wordsMap=trieTree.getWordsForPrefix(chs);
-            for(String word:wordsMap.keySet()){
+        entityMap=trieTree.getWordsForPrefix(chs);
+        if (entityMap == null || entityMap.size()==0){
+            return result;
+        }
+        for(String entity:entityMap.keySet()){
 //            System.out.println(word+" shows: "+ wordsMap.get(word)+" times");
-                entityMap = entityTrie.getWordsForPrefix(word);
-                if (entityMap != null && entityMap.size()>0){
-                    for (String entity: entityMap.keySet()){
-                    System.out.println("#####"+entity+":"+entityMap.get(entity));
-                        if (nextEntity==null){
-                            result.add(entity);
-                        }else {
-                            sorted.put(entity,nextEntity.get(entity));
-                        }
-                    }
+//            System.out.println("#####"+entity+":"+entityMap.get(entity));
+            if (nextEntity==null){
+                result.add(entity);
+            }else {
+                try{
+                    if (nextEntity.get(entity)>0.05 && nextEntity.get(entity)<0.9)
+                        sorted.put(entity,nextEntity.get(entity));
+                }catch (NullPointerException e){
+                    System.out.println("!!!!"+entity);
                 }
             }
         }
-        sorted = MapUtil.sortByValue(sorted);
+        sorted = MapUtils.srotedByValue(sorted);
         int count = 0;
         for (String str:
              sorted.keySet()) {
             result.add(str);
             count++;
             if (count>LEN) break;
-            if (sorted.get(str)<0.1) break;
             System.out.println(str+" similarity : "+ sorted.get(str));
         }
         return result;
     }
 
-    private Map<String,Float> getNextEntity(int word_index){
+    private Map<String,Float> getSimiEntity(String entity){
         int[] inputs = new int[1];
         Map<String,Float> outputs = new HashMap<>();
-        inputs[0] = word_index;
+        inputs[0] = entity2int.get(entity);
         Tensor<?> X_input = Tensor.create(inputs);
-        Tensor words = sess.runner().feed("X_input", X_input).fetch("top_k:1").run().get(0);
+        Tensor entities = sess.runner().feed("X_input", X_input).fetch("top_k:1").run().get(0);
         Tensor simi = sess.runner().feed("X_input", X_input).fetch("top_k:0").run().get(0);
-        int [][] words_index = new int[1][TOP_K];
+        int[][] emtity_index = new int[1][TOP_K];
         float[][] simi_index = new float[1][TOP_K];
-        words.copyTo(words_index);
+        entities.copyTo(emtity_index);
         simi.copyTo(simi_index);
         for (int i = 0; i < TOP_K; i++) {
-            outputs.put(int2entity.get(words_index[0][i]),simi_index[0][i]);
+            outputs.put(int2entity.get(emtity_index[0][i]),simi_index[0][i]);
         }
-        outputs = MapUtil.sortByValue(outputs);
+//        outputs = MapUtils.srotedByValue(outputs);
         return outputs;
     }
 
@@ -140,12 +118,7 @@ public class ModelPredService {
         sess= savedModelBundle.session();
 
         String keyword = "barack_obama";
-        Map<String, Float> nextEntity = getNextEntity(entity2int.get(keyword));
-
-//        for (String str:
-//             nextEntity.keySet()) {
-//            System.out.println(str+" with similarity :"+nextEntity.get(str));
-//        }
+        Map<String, Float> nextEntity = getSimiEntity(keyword);
 
         System.out.println("=================== model prediction end ===============================");
 

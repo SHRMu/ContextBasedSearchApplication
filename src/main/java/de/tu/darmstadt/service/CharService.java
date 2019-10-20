@@ -1,8 +1,6 @@
 package de.tu.darmstadt.service;
 
-import de.tu.darmstadt.utils.MapUtil;
 import org.springframework.stereotype.Service;
-import org.tensorflow.Tensor;
 
 import java.util.*;
 

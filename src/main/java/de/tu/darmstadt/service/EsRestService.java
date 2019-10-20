@@ -58,7 +58,7 @@ public class EsRestService {
     }
 
     /**
-     * 初始化索引
+     * initialiese Index
      *
      * @param indexName
      * @param typeName
@@ -73,11 +73,11 @@ public class EsRestService {
                              int shardNum,
                              int replicNum,
                              XContentBuilder builder) {
-        //创建索引
+        //create index
         RestHighLevelClient client = getRestClient();
         CreateIndexRequest request = new CreateIndexRequest(indexName);
 
-        //设置分片和副本
+        //set shards and replicas
         request.settings(Settings.builder()
                 .put("index.number_of_shards", shardNum)
                 .put("index.number_of_replicas", replicNum)
@@ -95,6 +95,7 @@ public class EsRestService {
     }
 
     /**
+     * build index based on news doc
      * @param indexName
      * @param typeName
      * @param jsonString
@@ -119,7 +120,6 @@ public class EsRestService {
 
 
     /**
-     * 判断索引是否存在
      *
      * @param indexName
      * @return
@@ -137,7 +137,7 @@ public class EsRestService {
     }
 
     /**
-     * 删除索引
+     * delete
      *
      * @param indexName
      * @return
@@ -149,7 +149,7 @@ public class EsRestService {
                 AcknowledgedResponse acknowledgedResponse = getRestClient().indices().delete(deleteIndexRequest, RequestOptions.DEFAULT);
                 return acknowledgedResponse.isAcknowledged();
             } else {
-                logger.info("索引不存在");
+                logger.info("index doesn't exist");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -159,7 +159,7 @@ public class EsRestService {
     }
 
     /**
-     * 批量索引文档
+     *
      *
      * @param indexName
      * @param typeName
@@ -182,7 +182,7 @@ public class EsRestService {
         try {
             BulkResponse bulkResponse = client.bulk(bulkRequest, RequestOptions.DEFAULT);
             if (bulkResponse.hasFailures()) {
-                logger.error("批量索引失败");
+                logger.error("index Doc failure ...");
                 return false;
             }
         } catch (IOException e) {
@@ -193,7 +193,7 @@ public class EsRestService {
 
 
     /**
-     * 搜索文档
+     * search docs
      *
      * @param indics
      * @param keyword
@@ -213,12 +213,12 @@ public class EsRestService {
 
         MultiMatchQueryBuilder multiMatchQuery = QueryBuilders
                 .multiMatchQuery(keyword, fieldNames)
-                .operator(Operator.AND);
+                .operator(Operator.OR);
         HighlightBuilder highlightBuilder = new HighlightBuilder();
         HighlightBuilder.Field highlightTitle =
-                new HighlightBuilder.Field("title");
+                new HighlightBuilder.Field("news_title");
         highlightBuilder.field(highlightTitle);
-        HighlightBuilder.Field highlightFilecontent = new HighlightBuilder.Field("filecontent");
+        HighlightBuilder.Field highlightFilecontent = new HighlightBuilder.Field("news_fulltext");
         highlightBuilder.field(highlightFilecontent);
 
         highlightBuilder
@@ -240,7 +240,7 @@ public class EsRestService {
 
                 Map<String, Object> sourceAsMap = hit.getSourceAsMap();
                 Map<String, HighlightField> highlightFields = hit.getHighlightFields();
-                HighlightField hTitle = highlightFields.get("title");
+                HighlightField hTitle = highlightFields.get("news_title");
 
                 if (hTitle != null) {
                     String hTitleText = "";
@@ -248,16 +248,16 @@ public class EsRestService {
                     for (Text text : fragments) {
                         hTitleText += text;
                     }
-                    sourceAsMap.put("title", hTitleText);
+                    sourceAsMap.put("news_title", hTitleText);
                 }
-                HighlightField hFilecontent = highlightFields.get("filecontent");
+                HighlightField hFilecontent = highlightFields.get("news_fulltext");
                 if (hFilecontent != null) {
                     String hFilecontentText = "";
                     Text[] fragments = hFilecontent.fragments();
                     for (Text text : fragments) {
                         hFilecontentText += text;
                     }
-                    sourceAsMap.put("filecontent", hFilecontentText);
+                    sourceAsMap.put("news_fulltext", hFilecontentText);
                 }
                 resultList.add(sourceAsMap);
             }

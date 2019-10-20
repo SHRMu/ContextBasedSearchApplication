@@ -1,5 +1,3 @@
-package de.tu.darmstadt.utils;
-
 import org.junit.Test;
 
 import java.io.*;
