@@ -2,7 +2,7 @@ package de.tu.darmstadt.domain;
 
 import de.tu.darmstadt.service.ModelPredService;
 import de.tu.darmstadt.utils.FileLoader;
-import org.apache.uima.internal.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import java.util.Collection;

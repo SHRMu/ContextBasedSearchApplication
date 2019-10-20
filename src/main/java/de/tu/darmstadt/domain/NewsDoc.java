@@ -1,5 +1,14 @@
 package de.tu.darmstadt.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
+
+@Component
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class NewsDoc {
     private int news_id;
     private String news_type;
