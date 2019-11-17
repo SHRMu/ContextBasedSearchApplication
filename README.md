@@ -1,26 +1,28 @@
-## Entity-Context-Based Search Suggestion Application
+## Entity-Context-Based Search Suggestion
 
-#### TU Darmstadt, Summer Term 2019, Data Management Project
+#### TU Darmstadt Summer Term 2019 Data Management Project
 
 ### Introdcution
-Elasticsearch is now a very popular search engine based on Lucene. But we think, in future the simple keywords search is not enougy.
-Therefore we consider to merge the machine learning technology, especially embeddings into traditional search engine. 
+Elasticsearch is now a very popular search engine based on Lucene. But we think, in future the simple keywords search is not enough.
+Therefore we consider to merge the machine learning technology, especially word embeddings into traditional search engine. 
 
 ### Implementation
 
 1. Elasticsearch development framework was forked from https://github.com/panholly/esfilesearch.
 
-2. Tensorflow model was trained and saved in Colaboratory, and then loaded by java code locally.
+2. Tensorflow model was trained and saved in Google Colaboratory, and then loaded by java code locally.
 
-3. Loading model from java code, the entity autocompletion is implemented based on trieTree structure
+3. Loaded training model used for entity suggestion, the entity autocompletion function is implemented based on trieTree structure
 
 ### Environment
 
 Elasticsearch 7.2.0
 
+Mysql 8.0.13 
+
 ### Entity Embedding
 
-rather then using the word embedding in traiditional NLP task, in this assignment we use the whole entity
+rather than using single word embedding in traiditional NLP task, in this assignment we use the specific entity embedding
 for model training and predicting. 
 
 ### Result

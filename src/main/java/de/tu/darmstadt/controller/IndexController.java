@@ -31,7 +31,7 @@ public class IndexController {
     }
 
     /**
-     * search new fulltext
+     * search news fulltext
      * @param model
      * @param input
      * @return
@@ -53,6 +53,12 @@ public class IndexController {
     }
 
 
+    /**
+     * entity suggestion
+     * @param searchData
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/entity", method = RequestMethod.POST)
     @ResponseBody
     public JSONArray getEntity(@RequestBody SearchData searchData, HttpServletRequest request){

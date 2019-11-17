@@ -14,11 +14,8 @@ public class FileLoader {
 
     public static void loadWords(){
         try {
-
             ModelPredService.entity2int = new HashMap<>();
             ModelPredService.int2entity = new HashMap<>();
-
-//            BufferedReader br = new BufferedReader(new FileReader("D:\\Github\\ContextBasedSuggestionSearchEngine\\src\\main\\resources\\mymodel\\allWords.txt"));
             Resource resource = new ClassPathResource("mymodel/allWords.txt");
             String Path = resource.getFile().getPath();
             BufferedReader br = new BufferedReader(new FileReader(Path));
@@ -49,15 +46,5 @@ public class FileLoader {
 //            }
             ModelPredService.trieTree.insert(entity);
         }
-    }
-
-    @Test
-    public void Test(){
-//        loadChars();
-//        System.out.println(ModelPredService.char2int.get("a"));
-//        System.out.println(ModelPredService.int2char.get(1));
-//        loadWords();
-//        System.out.println(ModelPredService.word2int.get("may"));
-//        System.out.println(ModelPredService.int2word.get(1));
     }
 }
